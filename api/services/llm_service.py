@@ -1,5 +1,6 @@
 import json
 
+import openai  # noqa: F401
 from openai import AsyncOpenAI
 
 from api.config import get_settings
