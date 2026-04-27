@@ -51,6 +51,8 @@ async def analyze_journal_entry(
 
     # Step 4: parse the response
     raw = response.choices[0].message.content
+    if raw is None:
+        raise ValueError("LLM returned empty response")
     parsed = json.loads(raw)
 
     # Step 5: return with entry_id attached
