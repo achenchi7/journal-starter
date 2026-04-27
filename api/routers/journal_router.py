@@ -54,26 +54,6 @@ async def get_entry(entry_id: str, entry_service: EntryService = Depends(get_ent
 
     return entry
 
-    """
-    TODO: Implement this endpoint to return a single journal entry by ID
-
-    Steps to implement:
-    1. Use entry_service.get_entry(entry_id) to fetch the entry
-    2. If entry is None, raise HTTPException with status_code=404
-    3. Return the entry directly (not wrapped in a dict)
-
-    Example response (status 200):
-    {
-        "id": "uuid-string",
-        "work": "...",
-        "struggle": "...",
-        "intention": "...",
-        "created_at": "...",
-        "updated_at": "..."
-    }
-
-    Hint: Check the update_entry endpoint for similar patterns
-    """
     raise HTTPException(status_code=501, detail="Not implemented - complete this endpoint!")
 
 
@@ -103,20 +83,6 @@ async def delete_entry(entry_id: str, entry_service: EntryService = Depends(get_
 
     return {"detail": "Entry deleted successfully"}
 
-    """
-    TODO: Implement this endpoint to delete a specific journal entry
-
-    Steps to implement:
-    1. Use entry_service.get_entry(entry_id) to check if entry exists
-    2. If entry is None, raise HTTPException with status_code=404
-    3. Use entry_service.delete_entry(entry_id) to delete the entry
-    4. Return a success response (status 200)
-
-    Example response (status 200):
-    {"detail": "Entry deleted successfully"}
-
-    Hint: Look at how the update_entry endpoint checks for existence
-    """
     raise HTTPException(status_code=501, detail="Not implemented - complete this endpoint!")
 
 
@@ -129,13 +95,6 @@ async def delete_all_entries(entry_service: EntryService = Depends(get_entry_ser
 
 @router.post("/entries/{entry_id}/analyze", response_model=AnalysisResponse)
 async def analyze_entry(entry_id: str, entry_service: EntryService = Depends(get_entry_service)):
-    """
-    Analyze a journal entry using AI.
-
-    Returns sentiment, summary, key topics, entry_id, and created_at timestamp.
-    The LLM call itself lives in api/services/llm_service.py - implementing
-    analyze_journal_entry there is part of the capstone.
-    """
     entry = await entry_service.get_entry(entry_id)
     if entry is None:
         raise HTTPException(status_code=404, detail="Entry not found")
